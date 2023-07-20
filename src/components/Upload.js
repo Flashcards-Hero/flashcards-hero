@@ -1,9 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
+import * as pdfjsLib from "pdfjs-dist/webpack";
 
 const Upload = () =>{
-    const handleFileChange = (e) =>{
-        console.log(e);
-    }
+    const [jsonOutput, setJsonOutput] = useState("");
+    const handleConvert = async (file) => {
+        const pdfData = new Uint8Array(await file.arrayBuffer());
+        try {
+          const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+          let pdfText = "";
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const textContent = await page.getTextContent();
+            const pageText = textContent.items.map((item) => item.str).join(" ");
+            pdfText += pageText + " ";
+          }
+          const jsonObject = { content: pdfText };
+          const jsonString = JSON.stringify(jsonObject, null, 2);
+          setJsonOutput(jsonString);
+        } catch (error) {
+          alert("Error while processing the PDF file.");
+          console.error(error);
+        }
+    };
+    
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (!file) {
+            alert("Please select a file.");
+            return;
+        }
+        handleConvert(file);
+    };
 
     return(
         <>
@@ -11,14 +38,8 @@ const Upload = () =>{
                 <div className='col-md-6'>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="file_input">Upload file</label>
                     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                        id="file_input" type="file" onChange={handleFileChange}
+                        type="file" onChange={handleFileChange}
                         accept="application/pdf,application/vnd.ms-excel"/>
-                    <button
-                        type="button"
-                        class="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline"
-                    >
-                        Process
-                    </button>
                 </div>
                 <div className='col-md-6'>
                     <h3>Range</h3>
@@ -41,6 +62,9 @@ const Upload = () =>{
                 </div>
                 </div>
 
+            </div>
+            <div>
+                <p>{jsonOutput}</p>
             </div>
         </>
     )
