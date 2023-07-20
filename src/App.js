@@ -1,25 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles/globals.css";
+import { useState } from "react";
+import FileUpload from "./components/FileUpload";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [files, setFiles] = useState([]);
+
+    return (
+        <div className="App">
+            <FileUpload handleSetFiles={setFiles} maxNumFiles={75} maxFileSizeMB={30} />
+        </div>
+    );
 }
 
 export default App;
