@@ -50,7 +50,7 @@ function FileUpload(props) {
                             console.log(file);
 
                             try {
-                                const processFileResponse = await axios.post("src/api/process-file", formData, {
+                                const processFileResponse = await axios.post("http://localhost:5000/generate", formData, {
                                     headers: {
                                         "Content-Type": "multipart/form-data",
                                     },
