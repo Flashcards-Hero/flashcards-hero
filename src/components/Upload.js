@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import * as pdfjsLib from "pdfjs-dist/webpack";
+import FlashCard from './FlashCard';
 
 
 const Upload = () =>{
     const [jsonOutput, setJsonOutput] = useState("");
-    const [resultTxt, setResultTxt] = useState("");
+    const [resultTxt, setResultTxt] = useState(null);
     const handleConvert = async (file) => {
         const pdfData = new Uint8Array(await file.arrayBuffer());
         try {
@@ -49,7 +50,8 @@ const Upload = () =>{
             if(response.status!=200){
                 setResultTxt("error");
             }
-            setResultTxt(data.choices[0].message.content);
+            setResultTxt(data.choices);
+            console.log(data.choices);
         }catch(e){
             console.log(e);
         }
@@ -89,14 +91,18 @@ const Upload = () =>{
                 </div>
 
             </div>
-            <div>
+            {/* <div>
                 <p>{jsonOutput}</p>
             </div>
-            <br/>
-            <h1>Result</h1>
-            <div>
-                <p>{resultTxt}</p>
-            </div>
+            <br/> */}
+            <div class="font-bold text-xl mb-2">Result:</div>
+            {resultTxt!=null && resultTxt.map((item, index)=>(
+                <>
+                    <div className='offset-md-2 col-md-6'>
+                        <FlashCard id={index} question={item.message.content} answer="123"/>
+                    </div>
+                </>
+            ))}
         </>
     )
 }
