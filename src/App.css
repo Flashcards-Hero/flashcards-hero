@@ -57,7 +57,7 @@
   transition: transform 1s;
 }
 
-.card:hover {
+.flip {
   transform: translateX(-100%) rotateY(-180deg);
 }
 

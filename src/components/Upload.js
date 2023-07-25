@@ -73,10 +73,11 @@ const Upload = () =>{
                         setResultTxt("error");
                         setIsLoading(false);
                     }
-                    setResultTxt(result.text);
+                    formatResponse(result.text, result.type);
                     // console.log(result.text);
                     setIsLoading(false);
                 }catch(e){
+                    setIsLoading(false);
                     console.log(e);
                 }
             }
@@ -87,8 +88,24 @@ const Upload = () =>{
             // setResultTxt(data.choices);
             console.log(data);
         }catch(e){
+            setIsLoading(false);
             console.log(e);
         }
+    }
+
+    const formatResponse = (res, type) =>{
+        const arr = res.split('\n\n')
+        // console.log(arr);
+        const object=[];
+        for(let i=0; i<arr.length; i++){
+            const qa = type=='td'?arr[i].split(':'):arr[i].split('\n');
+            console.log(qa);
+            const pair = {question: qa[0], answer: qa[1]}
+            object.push(pair);
+
+        }
+        setResultTxt(object);
+        console.log(object);
     }
 
     return(
@@ -103,22 +120,6 @@ const Upload = () =>{
                 <div className='col-md-3'>
                     <div className="font-bold text-xl mb-2">Range</div>
                     <input className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" id="range" type="text" placeholder="example: chapter 1-5"/>
-                    {/* <div className="flex flex-col">
-                    <label className="inline-flex items-center mt-3">
-                        <input type="checkbox" className="form-checkbox h-5 w-5 text-gray-600" /><span className="ml-2 text-gray-700">Chapter 1</span>
-                    </label>
-
-                    <label className="inline-flex items-center mt-3">
-                        <input type="checkbox" className="form-checkbox h-5 w-5 text-red-600" /><span className="ml-2 text-gray-700">Chapter 2</span>
-                    </label>
-
-                    <label className="inline-flex items-center mt-3">
-                        <input type="checkbox" className="form-checkbox h-5 w-5 text-orange-600" /><span className="ml-2 text-gray-700">Chapter 3</span>
-                    </label>
-
-                    <label className="inline-flex items-center mt-3">
-                        <input type="checkbox" className="form-checkbox h-5 w-5 text-yellow-600" /><span className="ml-2 text-gray-700">Chapter 4</span>
-                    </label> */}
                 </div>
                 <div className='col-md-3'>
                 <div className="font-bold text-xl mb-2">Question Type:</div>
@@ -132,6 +133,7 @@ const Upload = () =>{
                     </div>
                 </div>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={HandleGenerate} disabled={isLoading}>
+                    {isLoading&&(<div class="spinner-border spinner-border-sm text-light mr-3" role="status"></div>)}
                     Generate
                 </button>
             
@@ -143,16 +145,16 @@ const Upload = () =>{
             <br/>
             <div className="font-bold text-xl mb-2">Result:</div>
             {/* flash card ui */}
-            {/* {resultTxt!=null && resultTxt.map((item, index)=>(
+            {resultTxt!=null && resultTxt.map((item, index)=>(
                 <>
                     <div className='offset-md-2 col-md-6'>
-                        <FlashCard id={index} question={item.message.content} answer="123"/>
+                        <FlashCard id={index} question={item.question} answer={item.answer}/>
                     </div>
                 </>
-            ))} */}
-            <div>
+            ))}
+            {/* <div>
                 {resultTxt}
-            </div>
+            </div> */}
         </>
     )
 }
