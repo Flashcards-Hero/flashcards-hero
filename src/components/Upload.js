@@ -88,7 +88,7 @@ const Upload = () => {
                 setIsLoading(false);
             }
             // setResultTxt(data.choices);
-            console.log(data);
+            // console.log(data);
         } catch (e) {
             setIsLoading(false);
             console.log(e);
@@ -101,16 +101,17 @@ const Upload = () => {
         const object = [];
         for (let i = 0; i < arr.length; i++) {
             const qa = type === "td" ? arr[i].split(":") : arr[i].split("\n");
-            console.log(qa);
+            // console.log(qa);
             const pair = { question: qa[0], answer: qa[1] };
             object.push(pair);
         }
         setResultTxt(object);
-        console.log(object);
+        // console.log(object);
     };
 
     const handleNextCard = () => {
         if (currentCardIndex < resultTxt.length - 1) {
+            setFlip(false);
             setFlip(false);
             setCurrentCardIndex((prevIndex) => prevIndex + 1);
         }
@@ -118,6 +119,7 @@ const Upload = () => {
 
     const handlePreviousCard = () => {
         if (currentCardIndex > 0) {
+            setFlip(false);
             setFlip(false);
             setCurrentCardIndex((prevIndex) => prevIndex - 1);
         }
@@ -187,7 +189,7 @@ const Upload = () => {
                             <FlashCard id={index} question={item.question} answer={item.answer} />
                         </div>
                     </>
-                ))}
+                ))} */}
             {/* <div>
                 {resultTxt}
             </div> */}
