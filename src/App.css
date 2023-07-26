@@ -1,85 +1,90 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.next-pre-button-group{
+  position: relative;
 }
 
 /* Flash Cards */
 .scene {
-  display: inline-block;
-  width: 60vw;
-  height: 260px;
-  margin: 40px 0;
-  perspective: 600px;
+    display: inline-block;
+    width: 60vw;
+    height: 260px;
+    margin: 5px 0;
+    perspective: 600px;
 }
 
 .card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transform-origin: center right;
-  transition: transform 1s;
+    position: relative;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: center right;
+    transition: transform 0.4s;
 }
 
 .flip {
-  transform: translateX(-100%) rotateY(-180deg);
+    transform: translateX(-100%) rotateY(-180deg);
 }
 
 .card-face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  /* line-height: 260px; */
-  top: 50%;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 15px;
-  backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* line-height: 260px; */
+    top: 40%;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 10px;
+    backface-visibility: hidden;
 }
 
 .card-face-front {
-  /* background: crimson; */
-  color: #707070;
+    /* background: crimson; */
+    color: #707070;
 }
 
 .card-face-back {
-  color: #707070;
-  transform: rotateY(180deg);
+    color: #707070;
+    transform: rotateY(180deg);
 }
