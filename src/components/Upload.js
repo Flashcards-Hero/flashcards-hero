@@ -112,14 +112,12 @@ const Upload = () => {
     const handleNextCard = () => {
         if (currentCardIndex < resultTxt.length - 1) {
             setFlip(false);
-            setFlip(false);
             setCurrentCardIndex((prevIndex) => prevIndex + 1);
         }
     };
 
     const handlePreviousCard = () => {
         if (currentCardIndex > 0) {
-            setFlip(false);
             setFlip(false);
             setCurrentCardIndex((prevIndex) => prevIndex - 1);
         }
