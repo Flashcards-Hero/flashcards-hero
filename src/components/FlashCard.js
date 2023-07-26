@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const FlashCard = (props) => {
-    const { id, question, answer } = props;
-    const [flip, setFlip] = useState(false);
+    const { id, question, answer, setFlip, status } = props;
+    // const [flip, setFlip] = useState(false);
     const handleOnClick = () => {
-        setFlip(!flip);
+        setFlip(!status);
     };
 
     return (
         <>
             <div id={id} className="scene scene-card" onClick={handleOnClick}>
-                <div className={`card ${flip ? "flip" : ""}`}>
+                <div className={`card ${status ? "flip" : ""}`}>
                     <div className="card-face card-face-front">
                         <span>{question}</span>
                     </div>

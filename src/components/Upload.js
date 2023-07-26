@@ -7,6 +7,7 @@ const Upload = () => {
     const [resultTxt, setResultTxt] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [type, setType] = useState("");
+    const [flip, setFlip] = useState(false);
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
     const handleConvert = async (file) => {
@@ -87,7 +88,7 @@ const Upload = () => {
                 setIsLoading(false);
             }
             // setResultTxt(data.choices);
-            console.log(data);
+            // console.log(data);
         } catch (e) {
             setIsLoading(false);
             console.log(e);
@@ -100,22 +101,24 @@ const Upload = () => {
         const object = [];
         for (let i = 0; i < arr.length; i++) {
             const qa = type === "td" ? arr[i].split(":") : arr[i].split("\n");
-            console.log(qa);
+            // console.log(qa);
             const pair = { question: qa[0], answer: qa[1] };
             object.push(pair);
         }
         setResultTxt(object);
-        console.log(object);
+        // console.log(object);
     };
 
     const handleNextCard = () => {
         if (currentCardIndex < resultTxt.length - 1) {
+            setFlip(false);
             setCurrentCardIndex((prevIndex) => prevIndex + 1);
         }
     };
 
     const handlePreviousCard = () => {
         if (currentCardIndex > 0) {
+            setFlip(false);
             setCurrentCardIndex((prevIndex) => prevIndex - 1);
         }
     };
@@ -161,9 +164,9 @@ const Upload = () => {
             ) : (
                 <div className="flashcards">
                     <div className="offset-md-2 col-md-4">
-                        <FlashCard id={currentCardIndex} question={resultTxt[currentCardIndex].question} answer={resultTxt[currentCardIndex].answer} />
+                        <FlashCard id={currentCardIndex} question={resultTxt[currentCardIndex].question} answer={resultTxt[currentCardIndex].answer} setFlip={setFlip} status={flip}/>
                     </div>
-                    <div className="flex justify-center">
+                    <div className="next-pre-button-group flex justify-center z-50">
                         <button onClick={handlePreviousCard} disabled={currentCardIndex === 0} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
                             Previous
                         </button>
@@ -173,14 +176,14 @@ const Upload = () => {
                     </div>
                 </div>
             )}
-            {resultTxt != null &&
+            {/* {resultTxt != null &&
                 resultTxt.map((item, index) => (
                     <>
                         <div className="offset-md-2 col-md-4">
                             <FlashCard id={index} question={item.question} answer={item.answer} />
                         </div>
                     </>
-                ))}
+                ))} */}
             {/* <div>
                 {resultTxt}
             </div> */}

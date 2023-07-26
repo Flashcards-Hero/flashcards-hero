@@ -37,6 +37,10 @@
   }
 }
 
+.next-pre-button-group{
+  position: relative;
+}
+
 /* Flash Cards */
 .scene {
   display: inline-block;
