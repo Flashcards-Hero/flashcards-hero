@@ -189,7 +189,7 @@ const Upload = () => {
                             <FlashCard id={index} question={item.question} answer={item.answer} />
                         </div>
                     </>
-                ))} */}
+                ))}
             {/* <div>
                 {resultTxt}
             </div> */}
