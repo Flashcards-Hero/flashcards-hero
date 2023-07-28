@@ -2,19 +2,15 @@ import React, { useState } from "react";
 import Card from "./Card";
 
 function FlashCards({ resultTxt }) {
-    const [flip, setFlip] = useState(false);
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
     const handleNextCard = () => {
         if (currentCardIndex < resultTxt.length - 1) {
-            setFlip(false);
             setCurrentCardIndex((prevIndex) => prevIndex + 1);
         }
     };
-
     const handlePreviousCard = () => {
         if (currentCardIndex > 0) {
-            setFlip(false);
             setCurrentCardIndex((prevIndex) => prevIndex - 1);
         }
     };
@@ -30,7 +26,7 @@ function FlashCards({ resultTxt }) {
             ) : (
                 <div className="flashcards">
                     <div className="offset-md-2 col-md-4">
-                        <Card id={currentCardIndex} question={resultTxt[currentCardIndex].question} answer={resultTxt[currentCardIndex].answer} setFlip={setFlip} status={flip} />
+                        <Card id={currentCardIndex} question={resultTxt[currentCardIndex].question} answer={resultTxt[currentCardIndex].answer} />
                     </div>
                     <div className="row next-pre-button-group flex z-50 mb-5 offset-md-3">
                         <button onClick={handlePreviousCard} disabled={currentCardIndex === 0} className="col-sm-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-10">

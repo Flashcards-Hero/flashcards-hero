@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 const FlashCard = (props) => {
-    const { id, question, answer, setFlip, status } = props;
-    // const [flip, setFlip] = useState(false);
+    const { id, question, answer } = props;
+    const [status, setStatus] = useState(false);
     const handleOnClick = () => {
-        setFlip(!status);
+        setStatus(!status);
     };
 
     return (

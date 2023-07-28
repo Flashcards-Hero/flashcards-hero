@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as pdfjsLib from "pdfjs-dist/webpack";
 
-const Upload = ({ resultTxt, setResultTxt }) => {
+const Upload = ({ setResultTxt }) => {
     const [jsonOutput, setJsonOutput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [type, setType] = useState("");

@@ -7,7 +7,7 @@ function App() {
     const [resultTxt, setResultTxt] = useState(null);
     return (
         <>
-            <Upload resultTxt={resultTxt} setResultTxt={setResultTxt} />
+            <Upload setResultTxt={setResultTxt} />
             <FlashCards resultTxt={resultTxt} />
         </>
     );
